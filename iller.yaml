@@ -1,0 +1,30 @@
+---
+doctype: dist
+
+header:
+  name: App-Mikadoo
+  author:
+    - Erik Carlsson <info@code301.com>
+  license: Perl_5
+  copyright_holder: Erik Carlsson
+  copyright_year: 2015
+
+prereqs:
+  runtime:
+    requires:
+      - perl: 5.016000
+
+plugins:
+  - +config: Author::CSSON
+  
+  - +add_plugin: TravisYML
+    +before: Git::Tag
+    perl_version: 5.16 5.20
+
+---
+doctype: weaver
+
+plugins:
+  - +config: Author::CSSON
+
+  - +remove_plugin: Splint
