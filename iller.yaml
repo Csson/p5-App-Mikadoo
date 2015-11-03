@@ -13,6 +13,7 @@ prereqs:
   runtime:
     requires:
       - perl: 5.016000
+      - Term::UI: 0.44
 
 plugins:
   - +config: Author::CSSON

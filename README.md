@@ -2,11 +2,11 @@
 
 App::Mikadoo - Short intro
 
-![Requires Perl unknown](https://img.shields.io/badge/perl-unknown-brightgreen.svg) [![Travis status](https://api.travis-ci.org//.svg?branch=master)](https://travis-ci.org//)
+![Requires Perl 5.16+](https://img.shields.io/badge/perl-5.16+-brightgreen.svg) [![Travis status](https://api.travis-ci.org/Csson/p5-App-Mikadoo.svg?branch=master)](https://travis-ci.org/Csson/p5-App-Mikadoo)
 
 # VERSION
 
-Version 0.0001, released 2015-10-30.
+Version 0.0001, released 2015-11-03.
 
 # SYNOPSIS
 
