@@ -70,7 +70,7 @@ has term => (
     is => 'ro',
     default => sub { Term::ReadLine->new('mikadoo') },
 );
-has package => (
+has dist => (
     is => 'rw',
     isa => Str,
     predicate => 1,
@@ -105,9 +105,23 @@ sub _build_namespace($self) {
 
 }
 
-sub term_get_text($self, $prompt, @unused) {
-    $prompt = ref $prompt eq 'ARRAY' ? join "\n" => @$prompt : $prompt;
-    say "\n$prompt";
+sub perl_version_short($self) {
+    return undef if !$self->has_perl_version;
+    return $self->perl_version =~ s{^5\.(\d+)(?:\..*)$}{$1}r;
+}
+
+sub term_get_text($self, $prompt, $options = {}) {
+
+    my @prompts = ("\n$prompt");
+    if(exists $options->{'shortcuts'} && scalar $options->{'shortcuts'}->@*) {
+        my $longest = (sort { length $b->{'key'} <=> length $a->{'key'} } $options->{'shortcuts'}->@*)[0];
+        my $length = length $longest->{'key'};
+
+        for my $shortcut ($options->{'shortcuts'}->@*) {
+            push @prompts => sprintf "%-${length}s : %s", $shortcut->{'key'}, $shortcut->{'text'};
+        }
+    }
+    say join "\n" => @prompts;
     return $self->term->get_reply(prompt => '');
 }
 
@@ -174,8 +188,7 @@ sub term_choose_experimentals($self, $default = [qw/postderef signatures/]) {
 sub render($self, $template, $destination, $options = {}) {
     $options->{'remove_leading_whitespace'} //= 1;
 
-  #  my $templates = path($self->dir, qw<.. .. .. share templates>);
-    my $templates = path(dist_dir($self->package), 'templates');
+    my $templates = path(dist_dir($self->dist), 'templates');
 
     my $result_template = $templates->child($template)->slurp_utf8;
     my $rendered = Mojo::Template->new->render($result_template, $self);
@@ -184,7 +197,13 @@ sub render($self, $template, $destination, $options = {}) {
         $rendered = qqi{$rendered};
     }
 
-    $destination->spew_utf8($rendered);
+    if(!$destination->exists || $self->term_get_one("Render destination <$destination> exists. Overwrite?", [qw/yes no/], 'no') eq 'yes') {
+        $destination->spew_utf8($rendered);
+        say "<$destination> created.";
+    }
+    else {
+        say "<$destination> already existed. Did not overwrite.";
+    }
     return $self;
 }
 
@@ -192,7 +211,7 @@ sub render($self, $template, $destination, $options = {}) {
 sub ensure_parents_exist($self, @paths) {
     for my $path (@paths) {
         if($path->exists) {
-            die sprintf 'Path already exists: <%s>', $path;
+            say sprintf 'Path already exists: <%s>', $path;
         }
 
         if(!$path->parent->exists) {
