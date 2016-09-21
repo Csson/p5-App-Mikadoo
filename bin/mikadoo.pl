@@ -1,8 +1,9 @@
 #!/usr/bin/env perl
 
-# PODNAME: mikadoo.pl
-# VERSION
 # ABSTRACT: ..
+# AUTHORITY
+# PODNAME: mikadoo.pl
+our $VERSION = '0.0002';
 
 use App::Mikadoo;
 App::Mikadoo->new_with_command->run;

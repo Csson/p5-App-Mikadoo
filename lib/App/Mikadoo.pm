@@ -5,8 +5,9 @@ use warnings;
 package App::Mikadoo;
 use MooseX::App qw/Color/;
 
-# VERSION
 # ABSTRACT: Short intro
+# AUTHORITY
+our $VERSION = '0.0002';
 
 use Term::UI;
 use Term::ReadLine;
