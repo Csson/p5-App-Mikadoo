@@ -18,14 +18,11 @@ prereqs:
 plugins:
   - +config: Author::CSSON
   
-  - +add_plugin: TravisYML
-    +before: Git::Tag
-    perl_version: 5.16 5.20
+  - +extend_plugin: TravisYML
+    perl_version: 5.16 5.18 5.20 5.22
 
 ---
 doctype: weaver
 
 plugins:
   - +config: Author::CSSON
-
-  - +remove_plugin: Splint

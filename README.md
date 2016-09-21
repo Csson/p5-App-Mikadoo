@@ -2,11 +2,18 @@
 
 App::Mikadoo - Short intro
 
-![Requires Perl 5.16+](https://img.shields.io/badge/perl-5.16+-brightgreen.svg) [![Travis status](https://api.travis-ci.org/Csson/p5-App-Mikadoo.svg?branch=master)](https://travis-ci.org/Csson/p5-App-Mikadoo)
+<div>
+    <p>
+    <img src="https://img.shields.io/badge/perl-5.16+-blue.svg" alt="Requires Perl 5.16+" />
+    <a href="https://travis-ci.org/Csson/p5-App-Mikadoo"><img src="https://api.travis-ci.org/Csson/p5-App-Mikadoo.svg?branch=master" alt="Travis status" /></a>
+    <a href="http://cpants.cpanauthors.org/release/CSSON/App-Mikadoo-0.0002"><img src="http://badgedepot.code301.com/badge/kwalitee/CSSON/App-Mikadoo/0.0002" alt="Distribution kwalitee" /></a>
+    <a href="http://matrix.cpantesters.org/?dist=App-Mikadoo%200.0002"><img src="http://badgedepot.code301.com/badge/cpantesters/App-Mikadoo/0.0002" alt="CPAN Testers result" /></a>
+    </p>
+</div>
 
 # VERSION
 
-Version 0.0001, released 2015-11-03.
+Version 0.0002, released 2016-09-21.
 
 # SYNOPSIS
 
